@@ -7,8 +7,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const image = require('./assets/loginPageBlue.png');
 
-export default function App() {
-  return (
+function LoginPages({navigation}){
+  return(
     <View style={styles.container}>
       <ImageBackground source={image} style={styles.image}>
       <TouchableOpacity
@@ -20,7 +20,7 @@ export default function App() {
               opacity: 0.5,
               padding: 10,
               marginBottom:150,
-              marginTop: 350
+              marginTop: 240
             }} 
           >
             <Text>My Button</Text>
@@ -36,7 +36,7 @@ export default function App() {
               "paddingTop": 5,
               "width": 200,
               "height": 44,
-              marginBottom: 150,
+              marginBottom: 130,
               backgroundColor: 'grey', 
               opacity: 0.5,
             }} 
@@ -46,7 +46,7 @@ export default function App() {
         </TouchableOpacity>
 
       <TouchableOpacity
-      onPress={() => Alert.alert('Bottun button pressed')}>
+      onPress={() => navigation.navigate('Details')}>
           <View 
             style={{
               "alignItems": "flex-start",
@@ -56,6 +56,7 @@ export default function App() {
               "height": 44,
               backgroundColor: 'grey', 
               opacity: 0.5,
+              marginBottom: 70,
             }} 
           >
             <Text>My Button</Text>
@@ -67,6 +68,31 @@ export default function App() {
       
       <StatusBar style="auto" />
     </View>
+  );
+}
+
+function DetailsScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Details Screen</Text>
+      <Button
+        title="Go to Login Page"
+        onPress={() => navigation.navigate('Home')}
+      />
+    </View>
+  );
+}
+
+const Stack = createStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer >
+      <Stack.Navigator initialRouteName="Home" >
+        <Stack.Screen name="Home" component={LoginPages} />
+        <Stack.Screen name="Details" component={DetailsScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
