@@ -22,17 +22,21 @@ function LoginRegister({navigation}){
             style={{
               alignItems: "center",
               backgroundColor: 'grey', 
-              opacity: 0,
+              opacity: 0.5,
               padding: 10,
               width:157,
-              height: 650
+              height: 500
             }} 
           >
             <Text>My Button</Text>
           </View>
       </TouchableOpacity>
 
-      
+      <TextInput
+        style={{ height: 101, width: 474, marginBottom: 150, borderColor: 'gray', borderWidth: 1 }}
+        onChangeText={text => onChangeText(text)}
+        value={email}
+      />
 
       <TouchableOpacity
       onPress={() => navigation.navigate('About')}>
@@ -45,7 +49,7 @@ function LoginRegister({navigation}){
               "height": 44,
               backgroundColor: 'grey', 
               opacity: 0.5,
-              marginBottom: 70,
+              marginBottom: 170,
             }} 
           >
             <Text>My Button</Text>
@@ -57,13 +61,8 @@ function LoginRegister({navigation}){
       
       <StatusBar style="auto" />
       
-      <TextInput
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-        onChangeText={text => onChangeText(text)}
-        value={email}
-      />
+      
     </View>
-
   
   );
 }
