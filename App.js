@@ -4,6 +4,74 @@ import { ImageBackground, StyleSheet, Text, View, Button, TouchableOpacity, Aler
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+function LoginRegister({navigation}){
+  const EmailTextInput = () => {
+    const [email, onChangeText] = React.useState('Email')
+  }
+  const [email, onChangeText] = React.useState('Email')
+  const [pass, onChange] = React.useState('')
+
+
+  return(
+
+    <View style={styles.container}>
+      <ImageBackground source={require('./assets/LoginRegister.png')} style={styles.image}>
+      <TouchableOpacity
+      onPress={() => navigation.navigate('Home')}>
+          <View 
+            style={{
+              alignItems: "center",
+              backgroundColor: 'grey', 
+              opacity: 0,
+              padding: 10,
+              width:157,
+              height: 400
+            }} 
+          >
+            <Text>My Button</Text>
+          </View>
+      </TouchableOpacity>
+
+      <TextInput
+        style={{ alignItems:"center", height: 30, width: 170,marginTop:145, marginLeft:120, marginBottom: 80, borderColor: 'white', borderWidth: 1 }}
+        onChangeText={text => onChangeText(text)}
+        value={email}
+      />
+      <TextInput
+        style={{ alignItems:"center", height: 30, width: 170, marginLeft:120, marginBottom: 40, borderColor: 'white', borderWidth: 1 }}
+        onChange={text => onChange(text)}
+        value={pass}
+      />
+
+      <TouchableOpacity
+      onPress={() => navigation.navigate('About')}>
+          <View 
+            style={{
+              "alignItems": "flex-start",
+              "paddingStart": 40,
+              "paddingTop": 5,
+              "width": 200,
+              "height": 44,
+              backgroundColor: 'grey', 
+              opacity: 0,
+              marginBottom: 170,
+            }} 
+          >
+            <Text>My Button</Text>
+          </View>
+      </TouchableOpacity>
+
+        
+      </ImageBackground>
+      
+      <StatusBar style="auto" />
+      
+      
+    </View>
+  
+  );
+}
+
 function LoginPages({navigation}){
   return(
     <View style={styles.container}>
@@ -116,7 +184,7 @@ function DetailsScreen({ navigation }) {
               "width": 200,
               "height": 44,
               backgroundColor: 'grey', 
-              opacity: 0.5,
+              opacity: 0,
               marginBottom: 70,
             }} 
           >
@@ -215,7 +283,8 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer >
-      <Stack.Navigator initialRouteName="Home" >
+      <Stack.Navigator initialRouteName="Login" >
+      <Stack.Screen name="Login" component={LoginRegister} />
         <Stack.Screen name="Home" component={LoginPages} />
         <Stack.Screen name="About" component={DetailsScreen} />
         <Stack.Screen name="Calendar" component={Calendar} />
