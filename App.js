@@ -139,7 +139,7 @@ function LoginPages({navigation}){
 function DetailsScreen({ navigation }) {
   return (
     <View style={styles.container}>
-      <ImageBackground source={require('./assets/AboutPage.png')} style={styles.image}>
+      <ImageBackground source={require('./assets/About.png')} style={styles.image}>
       <TouchableOpacity
       onPress={() => navigation.navigate('Home')}>
           <View 
@@ -216,7 +216,24 @@ function NewGoal({ navigation }) {
   return (
     <View style={styles.container}>
       <ImageBackground source={require('./assets/NewGoal.png')} style={styles.image}>
-        
+      <TouchableOpacity
+      onPress={() => navigation.navigate('About2')}>
+          <View 
+            style={{
+              "alignItems": "flex-start",
+              "paddingStart": 40,
+              "paddingTop": 5,
+              "width": 200,
+              "height": 340,
+              backgroundColor: 'grey', 
+              opacity: 0,
+              marginTop: 250,
+              
+            }} 
+          >
+            <Text>Add Goal</Text>
+          </View>
+      </TouchableOpacity>
       </ImageBackground>
       
       <StatusBar style="auto" />
@@ -300,7 +317,7 @@ function Goals({ navigation }) {
               "width": 200,
               "height": 44,
               backgroundColor: 'grey', 
-              opacity: 0.5,
+              opacity: 0,
               marginTop: 50,
               
             }} 
@@ -318,7 +335,7 @@ function Goals({ navigation }) {
               "width": 200,
               "height": 44,
               backgroundColor: 'grey', 
-              opacity: 0.5,
+              opacity: 0,
               marginTop: 50,
               
             }} 
@@ -339,6 +356,18 @@ function Goals2({ navigation }) {
   return (
     <View style={styles.container}>
       <ImageBackground source={require('./assets/Goals_3.png')} style={styles.image}>
+        
+      </ImageBackground>
+      
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
+function About2({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <ImageBackground source={require('./assets/About_2.png')} style={styles.image}>
         
       </ImageBackground>
       
@@ -387,6 +416,7 @@ export default function App() {
         <Stack.Screen name="Goals2" component={Goals2} />
         <Stack.Screen name="NewGoal" component={NewGoal} />
         <Stack.Screen name="Skills" component={Skills} />
+        <Stack.Screen name="About2" component={About2} />
       </Stack.Navigator>
     </NavigationContainer>
   );
