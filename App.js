@@ -9,6 +9,7 @@ function LoginRegister({navigation}){
   const EmailTextInput = () => {
     const [email, onChangeText] = React.useState('Email')
   }
+  const [email, onChangeText] = React.useState('Email')
 
 
   return(
@@ -16,7 +17,7 @@ function LoginRegister({navigation}){
     <View style={styles.container}>
       <ImageBackground source={require('./assets/LoginRegister.png')} style={styles.image}>
       <TouchableOpacity
-      onPress={() => navigation.navigate('Login button pressed')}>
+      onPress={() => navigation.navigate('Home')}>
           <View 
             style={{
               alignItems: "center",
@@ -31,23 +32,7 @@ function LoginRegister({navigation}){
           </View>
       </TouchableOpacity>
 
-      <TouchableOpacity
-      onPress={() => Alert.alert('Top button pressed')}>
-          <View 
-            style={{
-              "alignItems": "flex-start",
-              "paddingStart": 40,
-              "paddingTop": 5,
-              "width": 200,
-              "height": 44,
-              marginBottom: 130,
-              backgroundColor: 'grey', 
-              opacity: 0,
-            }} 
-          >
-            <Text>My Button</Text>
-          </View>
-        </TouchableOpacity>
+      
 
       <TouchableOpacity
       onPress={() => navigation.navigate('About')}>
@@ -59,7 +44,7 @@ function LoginRegister({navigation}){
               "width": 200,
               "height": 44,
               backgroundColor: 'grey', 
-              opacity: 0,
+              opacity: 0.5,
               marginBottom: 70,
             }} 
           >
@@ -75,7 +60,7 @@ function LoginRegister({navigation}){
       <TextInput
         style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
         onChangeText={text => onChangeText(text)}
-        value={value}
+        value={email}
       />
     </View>
 
@@ -268,7 +253,8 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer >
-      <Stack.Navigator initialRouteName="Home" >
+      <Stack.Navigator initialRouteName="Login" >
+      <Stack.Screen name="Login" component={LoginRegister} />
         <Stack.Screen name="Home" component={LoginPages} />
         <Stack.Screen name="About" component={DetailsScreen} />
         <Stack.Screen name="Calendar" component={Calendar} />
