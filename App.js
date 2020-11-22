@@ -10,7 +10,7 @@ function LoginPages({navigation}){
     <View style={styles.container}>
       <ImageBackground source={require('./assets/loginPageBlue.png')} style={styles.image}>
       <TouchableOpacity
-      onPress={() => navigation.navigate('Goals')}>
+      onPress={() => navigation.navigate('Skills')}>
           <View 
             style={{
               alignItems: "center",
@@ -185,6 +185,32 @@ function Goals2({ navigation }) {
   );
 }
 
+function Skills({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <ImageBackground source={require('./assets/SkillsAndGoals.png')} style={styles.image}>
+      <TouchableOpacity
+      onPress={() => navigation.navigate('Goals')}>
+          <View 
+            style={{
+              alignItems: "center",
+              backgroundColor: 'grey', 
+              opacity: 0,
+              padding: 10,
+              marginBottom:150,
+              marginTop: 240
+            }} 
+          >
+            <Text>My Button</Text>
+          </View>
+      </TouchableOpacity>
+      </ImageBackground>
+      
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -196,6 +222,7 @@ export default function App() {
         <Stack.Screen name="Calendar" component={Calendar} />
         <Stack.Screen name="Goals" component={Goals} />
         <Stack.Screen name="Goals2" component={Goals2} />
+        <Stack.Screen name="Skills" component={Skills} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -226,4 +253,4 @@ const styles = StyleSheet.create({
     padding: 10,
     
   },
-});
+});  
