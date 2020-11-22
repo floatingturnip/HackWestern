@@ -29,56 +29,18 @@ function LoginRegister({navigation}){
           >
             <Text>My Button</Text>
           </View>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-      onPress={() => Alert.alert('Top button pressed')}>
-          <View 
-            style={{
-              "alignItems": "flex-start",
-              "paddingStart": 40,
-              "paddingTop": 5,
-              "width": 200,
-              "height": 44,
-              marginBottom: 130,
-              backgroundColor: 'grey', 
-              opacity: 0,
-            }} 
-          >
-            <Text>My Button</Text>
-          </View>
-        </TouchableOpacity>
-
-      <TouchableOpacity
-      onPress={() => navigation.navigate('About')}>
-          <View 
-            style={{
-              "alignItems": "flex-start",
-              "paddingStart": 40,
-              "paddingTop": 5,
-              "width": 200,
-              "height": 44,
-              backgroundColor: 'grey', 
-              opacity: 0,
-              marginBottom: 70,
-            }} 
-          >
-            <Text>My Button</Text>
-          </View>
-      </TouchableOpacity>
-
-        
+      </TouchableOpacity>  
+      
+      <TextInput
+        style={{ height: 101, width: 474, borderColor: 'gray', borderWidth: 1 }}
+        onChangeText={text => onChangeText(text)}
+        value={email}
+      /> 
+      
       </ImageBackground>
       
       <StatusBar style="auto" />
-      
-      <TextInput
-        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-        onChangeText={text => onChangeText(text)}
-        value={value}
-      />
     </View>
-
   
   );
 }
