@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { ImageBackground, StyleSheet, Text, View, Button, TouchableOpacity, Alert, TextInput } from 'react-native';
+import { ImageBackground, StyleSheet, Text, View, Button, TouchableOpacity, Alert, TextInput, Switch } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -8,7 +8,7 @@ function LoginRegister({navigation}){
   const EmailTextInput = () => {
     const [email, onChangeText] = React.useState('Email')
   }
-  const [email, onChangeText] = React.useState('Email')
+  const [email, onChangeText] = React.useState('')
   const [pass, onChange] = React.useState('')
 
 
@@ -141,15 +141,15 @@ function DetailsScreen({ navigation }) {
     <View style={styles.container}>
       <ImageBackground source={require('./assets/AboutPage.png')} style={styles.image}>
       <TouchableOpacity
-      onPress={() => console.log(2)}>
+      onPress={() => navigation.navigate('Home')}>
           <View 
             style={{
               alignItems: "center",
               backgroundColor: 'grey', 
               opacity: 0,
               padding: 10,
-              marginBottom:150,
-              marginTop: 240
+              marginBottom:300,
+              marginTop: 200
             }} 
           >
             <Text>My Button</Text>
@@ -185,7 +185,7 @@ function DetailsScreen({ navigation }) {
               "height": 44,
               backgroundColor: 'grey', 
               opacity: 0,
-              marginBottom: 70,
+              marginBottom: 170,
             }} 
           >
             <Text>My Button</Text>
@@ -212,11 +212,85 @@ function Calendar({ navigation }) {
   );
 }
 
+function NewGoal({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <ImageBackground source={require('./assets/NewGoal.png')} style={styles.image}>
+        
+      </ImageBackground>
+      
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
 function Goals({ navigation }) {
+  const [isEnabled, setIsEnabled] = React.useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
+  const [isEnabled2, setIsEnabled2] = React.useState(false);
+  const toggleSwitch2 = () => setIsEnabled2(previousState => !previousState);
+
+  const [isEnabled3, setIsEnabled3] = React.useState(false);
+  const toggleSwitch3 = () => setIsEnabled3(previousState => !previousState);
+
   return (
     <View style={styles.container}>
       <ImageBackground source={require('./assets/Goals_1.png')} style={styles.image}>
-      <TouchableOpacity
+      <View style={{ 
+        flex: 0,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        marginRight:80,
+        marginLeft:285,
+        marginBottom:83,
+        marginTop: 95
+        
+      }}>
+      <Switch
+        trackColor={{ false: "#767577", true: "#81b0ff" }}
+        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+        //ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+      />
+    </View>
+    <View style={{ 
+        flex: 0,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        marginRight:80,
+        marginLeft:285,
+        marginBottom:82
+        
+      }}>
+      <Switch
+        trackColor={{ false: "#767577", true: "#81b0ff" }}
+        thumbColor={isEnabled2 ? "#f5dd4b" : "#f4f3f4"}
+        //ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch2}
+        value={isEnabled2}
+      />
+    </View>
+
+    <View style={{ 
+        flex: 0,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        marginRight:80,
+        marginLeft:285,
+        marginBottom:0
+        
+      }}>
+      <Switch
+        trackColor={{ false: "#767577", true: "#81b0ff" }}
+        thumbColor={isEnabled3 ? "#f5dd4b" : "#f4f3f4"}
+        //ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch3}
+        value={isEnabled3}
+      />
+    </View>
+    <TouchableOpacity
       onPress={() => navigation.navigate('Goals2')}>
           <View 
             style={{
@@ -226,13 +300,34 @@ function Goals({ navigation }) {
               "width": 200,
               "height": 44,
               backgroundColor: 'grey', 
-              opacity: 0,
-              marginBottom: 400,
+              opacity: 0.5,
+              marginTop: 50,
+              
             }} 
           >
-            <Text>My Button</Text>
+            <Text>Toggle</Text>
           </View>
       </TouchableOpacity>
+      <TouchableOpacity
+      onPress={() => navigation.navigate('NewGoal')}>
+          <View 
+            style={{
+              "alignItems": "flex-start",
+              "paddingStart": 40,
+              "paddingTop": 5,
+              "width": 200,
+              "height": 44,
+              backgroundColor: 'grey', 
+              opacity: 0.5,
+              marginTop: 50,
+              
+            }} 
+          >
+            <Text>Add Goal</Text>
+          </View>
+      </TouchableOpacity>
+
+      
       </ImageBackground>
       
       <StatusBar style="auto" />
@@ -290,6 +385,7 @@ export default function App() {
         <Stack.Screen name="Calendar" component={Calendar} />
         <Stack.Screen name="Goals" component={Goals} />
         <Stack.Screen name="Goals2" component={Goals2} />
+        <Stack.Screen name="NewGoal" component={NewGoal} />
         <Stack.Screen name="Skills" component={Skills} />
       </Stack.Navigator>
     </NavigationContainer>
