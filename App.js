@@ -1,16 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { ImageBackground, StyleSheet, Text, View, Button, TouchableOpacity, Alert, TextInput } from 'react-native';
-import Background from './assets/loginPageBlue.png';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 function LoginPages({navigation}){
   return(
     <View style={styles.container}>
-      <ImageBackground source={require('./assets/loginPageBlue.png')} style={styles.image}>
+      <ImageBackground source={require('./assets/StartPage.png')} style={styles.image}>
       <TouchableOpacity
-      onPress={() => navigation.navigate('Goals')}>
+      onPress={() => navigation.navigate('Skills')}>
           <View 
             style={{
               alignItems: "center",
@@ -148,7 +147,7 @@ function Calendar({ navigation }) {
 function Goals({ navigation }) {
   return (
     <View style={styles.container}>
-      <ImageBackground source={require('./assets/Goals.png')} style={styles.image}>
+      <ImageBackground source={require('./assets/Goals_1.png')} style={styles.image}>
       <TouchableOpacity
       onPress={() => navigation.navigate('Goals2')}>
           <View 
@@ -176,8 +175,34 @@ function Goals({ navigation }) {
 function Goals2({ navigation }) {
   return (
     <View style={styles.container}>
-      <ImageBackground source={require('./assets/Goals2.png')} style={styles.image}>
+      <ImageBackground source={require('./assets/Goals_3.png')} style={styles.image}>
         
+      </ImageBackground>
+      
+      <StatusBar style="auto" />
+    </View>
+  );
+}
+
+function Skills({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <ImageBackground source={require('./assets/SkillsAndGoals.png')} style={styles.image}>
+      <TouchableOpacity
+      onPress={() => navigation.navigate('Goals')}>
+          <View 
+            style={{
+              alignItems: "center",
+              backgroundColor: 'grey', 
+              opacity: 0,
+              padding: 10,
+              marginBottom:150,
+              marginTop: 240
+            }} 
+          >
+            <Text>My Button</Text>
+          </View>
+      </TouchableOpacity>
       </ImageBackground>
       
       <StatusBar style="auto" />
@@ -196,6 +221,7 @@ export default function App() {
         <Stack.Screen name="Calendar" component={Calendar} />
         <Stack.Screen name="Goals" component={Goals} />
         <Stack.Screen name="Goals2" component={Goals2} />
+        <Stack.Screen name="Skills" component={Skills} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -226,4 +252,4 @@ const styles = StyleSheet.create({
     padding: 10,
     
   },
-});
+});  
