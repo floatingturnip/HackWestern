@@ -5,6 +5,84 @@ import Background from './assets/loginPageBlue.png';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+function LoginRegister({navigation}){
+  const EmailTextInput = () => {
+    const [email, onChangeText] = React.useState('Email')
+  }
+
+
+  return(
+
+    <View style={styles.container}>
+      <ImageBackground source={require('./assets/LoginRegister.png')} style={styles.image}>
+      <TouchableOpacity
+      onPress={() => navigation.navigate('Login button pressed')}>
+          <View 
+            style={{
+              alignItems: "center",
+              backgroundColor: 'grey', 
+              opacity: 0,
+              padding: 10,
+              width:157,
+              height: 650
+            }} 
+          >
+            <Text>My Button</Text>
+          </View>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+      onPress={() => Alert.alert('Top button pressed')}>
+          <View 
+            style={{
+              "alignItems": "flex-start",
+              "paddingStart": 40,
+              "paddingTop": 5,
+              "width": 200,
+              "height": 44,
+              marginBottom: 130,
+              backgroundColor: 'grey', 
+              opacity: 0,
+            }} 
+          >
+            <Text>My Button</Text>
+          </View>
+        </TouchableOpacity>
+
+      <TouchableOpacity
+      onPress={() => navigation.navigate('About')}>
+          <View 
+            style={{
+              "alignItems": "flex-start",
+              "paddingStart": 40,
+              "paddingTop": 5,
+              "width": 200,
+              "height": 44,
+              backgroundColor: 'grey', 
+              opacity: 0,
+              marginBottom: 70,
+            }} 
+          >
+            <Text>My Button</Text>
+          </View>
+      </TouchableOpacity>
+
+        
+      </ImageBackground>
+      
+      <StatusBar style="auto" />
+      
+      <TextInput
+        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+        onChangeText={text => onChangeText(text)}
+        value={value}
+      />
+    </View>
+
+  
+  );
+}
+
 function LoginPages({navigation}){
   return(
     <View style={styles.container}>
