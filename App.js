@@ -10,6 +10,7 @@ function LoginRegister({navigation}){
     const [email, onChangeText] = React.useState('Email')
   }
   const [email, onChangeText] = React.useState('Email')
+  const [pass, onChange] = React.useState('')
 
 
   return(
@@ -22,10 +23,10 @@ function LoginRegister({navigation}){
             style={{
               alignItems: "center",
               backgroundColor: 'grey', 
-              opacity: 0.5,
+              opacity: 0,
               padding: 10,
               width:157,
-              height: 500
+              height: 400
             }} 
           >
             <Text>My Button</Text>
@@ -33,9 +34,14 @@ function LoginRegister({navigation}){
       </TouchableOpacity>
 
       <TextInput
-        style={{ height: 101, width: 474, marginBottom: 150, borderColor: 'gray', borderWidth: 1 }}
+        style={{ alignItems:"center", height: 30, width: 170,marginTop:145, marginLeft:120, marginBottom: 80, borderColor: 'white', borderWidth: 1 }}
         onChangeText={text => onChangeText(text)}
         value={email}
+      />
+      <TextInput
+        style={{ alignItems:"center", height: 30, width: 170, marginLeft:120, marginBottom: 40, borderColor: 'white', borderWidth: 1 }}
+        onChange={text => onChange(text)}
+        value={pass}
       />
 
       <TouchableOpacity
@@ -48,7 +54,7 @@ function LoginRegister({navigation}){
               "width": 200,
               "height": 44,
               backgroundColor: 'grey', 
-              opacity: 0.5,
+              opacity: 0,
               marginBottom: 170,
             }} 
           >
@@ -179,7 +185,7 @@ function DetailsScreen({ navigation }) {
               "width": 200,
               "height": 44,
               backgroundColor: 'grey', 
-              opacity: 0.5,
+              opacity: 0,
               marginBottom: 70,
             }} 
           >
