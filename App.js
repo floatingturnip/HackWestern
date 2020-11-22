@@ -1,16 +1,37 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { ImageBackground, StyleSheet, Text, View, Button, TouchableOpacity, Alert, TextInput } from 'react-native';
-import Background from './assets/loginPageBlue.png';
+import React, { useState, useEffect, useRef } from 'react';
+import { ImageBackground, StyleSheet, Text, View, Button, TouchableOpacity, Alert, TextInput, Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import * as Notifications from 'expo-notifications';
+import * as Permissions from 'expo-permissions';
+import Constants from 'expo-constants';
+
+var user = {
+  name: "Michael",
+  goals: ["goal1", "goal2"]
+}
+
+var goal = {
+  start_date: "",
+  end_date: ""
+}
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
 function LoginPages({navigation}){
   return(
     <View style={styles.container}>
       <ImageBackground source={require('./assets/loginPageBlue.png')} style={styles.image}>
       <TouchableOpacity
-      onPress={() => navigation.navigate('Goals')}>
+      onPress={() => navigation.navigate('Goals')}
+      >
           <View 
             style={{
               alignItems: "center",
@@ -26,7 +47,10 @@ function LoginPages({navigation}){
       </TouchableOpacity>
 
       <TouchableOpacity
-      onPress={() => Alert.alert('Top button pressed')}>
+      onPress={async () => {
+        await sendPushNotification(expoPushToken);
+      }}
+      >
           <View 
             style={{
               "alignItems": "flex-start",
@@ -117,7 +141,7 @@ function DetailsScreen({ navigation }) {
               "width": 200,
               "height": 44,
               backgroundColor: 'grey', 
-              opacity: 0.5,
+              opacity: 0,
               marginBottom: 70,
             }} 
           >
@@ -188,6 +212,30 @@ function Goals2({ navigation }) {
 const Stack = createStackNavigator();
 
 export default function App() {
+  const [expoPushToken, setExpoPushToken] = useState('');
+  const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
+
+  useEffect(() => {
+    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+
+    // This listener is fired whenever a notification is received while the app is foregrounded
+    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+      setNotification(notification);
+    });
+
+    // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log(response);
+    });
+
+    return () => {
+      Notifications.removeNotificationSubscription(notificationListener);
+      Notifications.removeNotificationSubscription(responseListener);
+    };
+  }, []);
+
   return (
     <NavigationContainer >
       <Stack.Navigator initialRouteName="Home" >
@@ -227,3 +275,55 @@ const styles = StyleSheet.create({
     
   },
 });
+
+// Can use this function below, OR use Expo's Push Notification Tool-> https://expo.io/notifications
+async function sendPushNotification(expoPushToken) {
+  const message = {
+    to: expoPushToken,
+    sound: 'default',
+    title: 'Reminder',
+    body: 'Time to go workout!',
+    data: { data: 'goes here' },
+  };
+
+  await fetch('https://exp.host/--/api/v2/push/send', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Accept-encoding': 'gzip, deflate',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(message),
+  });
+}
+
+async function registerForPushNotificationsAsync() {
+  let token;
+  if (Constants.isDevice) {
+    const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+    let finalStatus = existingStatus;
+    if (existingStatus !== 'granted') {
+      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+      finalStatus = status;
+    }
+    if (finalStatus !== 'granted') {
+      alert('Failed to get push token for push notification!');
+      return;
+    }
+    token = (await Notifications.getExpoPushTokenAsync()).data;
+    console.log(token);
+  } else {
+    alert('Must use physical device for Push Notifications');
+  }
+
+  if (Platform.OS === 'android') {
+    Notifications.setNotificationChannelAsync('default', {
+      name: 'default',
+      importance: Notifications.AndroidImportance.MAX,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: '#FF231F7C',
+    });
+  }
+
+  return token;
+}
