@@ -4,7 +4,7 @@ import { ImageBackground, StyleSheet, Text, View, Button, TouchableOpacity, Aler
 import Background from './assets/loginPageBlue.png';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { useRadioGroup } from '@material-ui/core';
+
 import * as Progress from 'react-native-progress';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 //import MaterialIcon from 'material-icons-react';
@@ -18,7 +18,11 @@ const user = {
   name: "Michael",
   goalsAchieved: 6,
   goalsToGo: 4,
-  goal: ["French", "Workout"]
+  //goal: ["French", "Workout"],
+  goal: [{name:'French', height:200},
+            {name:'Wrokout', height:250},],
+
+  //goalHeight: ["French"=200, "Workout"=250]
 }
 
 function LoginPages({navigation}){
@@ -80,7 +84,7 @@ function LoginPages({navigation}){
               borderBottomRightRadius: 20,
               borderTopRightRadius: 20,
             }} >
-              <Text style={{paddingBottom: 8, color: "white", fontSize: 23}}>{user.goal[0]}{"\n"}</Text>
+              <Text style={{paddingBottom: 8, color: "white", fontSize: 23}}>{user.goal[0]['name']}{"\n"}</Text>
               <Progress.Bar progress={0.3} width={300} height={10} color='#5F97AA' unfilledColor="#EAF9FE"/>
       </View>
       <View style={{
@@ -100,7 +104,7 @@ function LoginPages({navigation}){
               borderBottomRightRadius: 20,
               borderTopRightRadius: 20,
             }} >
-              <Text style={{paddingBottom: 8, color: "white", fontSize: 23}}>{user.goal[1]}{"\n"}</Text>
+              <Text style={{paddingBottom: 8, color: "white", fontSize: 23}}>{user.goal[1]['name']}{"\n"}</Text>
               <Progress.Bar progress={0.8} width={300} height={10} color='#5F97AA' unfilledColor="#EAF9FE"/>
       </View>
         
@@ -190,24 +194,40 @@ function Calendar({ navigation }) {
 function Goals({ navigation }) {
   return (
     <View style={styles.container}>
-      <ImageBackground source={require('./assets/Goals.png')} style={styles.image}>
-      <TouchableOpacity
-      onPress={() => navigation.navigate('Goals2')}>
-          <View 
-            style={{
-              "alignItems": "flex-start",
-              "paddingStart": 40,
-              "paddingTop": 5,
-              "width": 200,
-              "height": 44,
-              backgroundColor: 'grey', 
-              opacity: 0,
-              marginBottom: 400,
-            }} 
-          >
-            <Text>My Button</Text>
-          </View>
-      </TouchableOpacity>
+      <ImageBackground source={require('./assets/goals_1.png')} style={styles.image}>
+      <Text style={{position:'absolute',
+          left:55,
+          top:'8%',
+          fontSize: 40,
+          fontWeight: 'bold',
+          color: "#FFFFFF"}}
+          >My Goals</Text>
+      
+      {user.goal.map(goal => (
+        
+     
+          <View style={{
+              position: "absolute",
+              alignItems: "left",
+              backgroundColor: "#18363E",
+              borderWidth: 0,
+              top: goal['height'],
+              left: 35,
+              height: 70,
+              width: 350,
+              paddingLeft: 20,
+              paddingTop: 5,
+              paddingBottom: 13,
+              borderTopLeftRadius: 20,
+              borderBottomLeftRadius: 20,
+              borderBottomRightRadius: 20,
+              borderTopRightRadius: 20,
+            }} >
+              <Text style={{paddingBottom: 8, color: "white", fontSize: 23}}>{user.goal[1]}{"\n"}</Text>
+              <Progress.Bar progress={0.8} width={300} height={10} color='#5F97AA' unfilledColor="#EAF9FE"/>
+              </View>
+         
+         ))}
       </ImageBackground>
       
       <StatusBar style="auto" />
