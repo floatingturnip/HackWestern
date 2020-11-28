@@ -1,5 +1,5 @@
 # Resolution
-HackWestern 2020 - a mobile app that encourages healthy routine practices and prevents procrastination
+HackWestern 2020 - Resolution: a mobile app that encourages healthy routine practices and prevents procrastination
 
 ## Set up
 To run this, make sure you have [Node.js](https://nodejs.org/en/) installed. 
